@@ -24,11 +24,11 @@
         "typescript": "*"
     },
     "scripts": {
-        "build": "tsc -p ./src",
+        "build": "tsc -p .",
         "prepublishOnly": "tsc",
-        "preinstall": "tsc -p ./src",
-        "install": "tsc -p ./src",
-        "postinstall": "tsc -p ./src",
+        "preinstall": "tsc -p .",
+        "install": "tsc -p .",
+        "postinstall": "tsc -p .",
         "test": "echo \"Error: no test specified\" && exit 1"
     }
 }
