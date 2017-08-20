@@ -26,6 +26,9 @@
     "scripts": {
         "build": "tsc -p ./src",
         "prepublishOnly": "tsc",
+        "preinstall": "tsc -p ./src",
+        "install": "tsc -p ./src",
+        "postinstall": "tsc -p ./src",
         "test": "echo \"Error: no test specified\" && exit 1"
     }
 }
