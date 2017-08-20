@@ -26,7 +26,6 @@
     "scripts": {
         "build": "tsc",
         "prepublishOnly": "tsc",
-        "preinstall": "tsc -p ./node_modules/tsst/",
         "install": "tsc -p ./node_modules/tsst/",
         "postinstall": "tsc -p ./node_modules/tsst/",
         "test": "echo \"Error: no test specified\" && exit 1"
