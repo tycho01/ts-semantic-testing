@@ -5,9 +5,6 @@
     "license": "ISC",
     "version": "0.3.2",
     "main": "./dist/index.js",
-    "bin": {
-        "tsst": "./dist/build.js"
-    },
     "types": "./dist/index.d.ts",
     "dependencies": {
         "commandpost": "^1.2.0",
@@ -18,7 +15,7 @@
         "@types/minimatch": "^2.0.29",
         "@types/node": "^8.0.20",
         "tslint": "^5.6.0",
-        "typescript": "^2.5.0-dev.20170808"
+        "typescript": "github:Microsoft/TypeScript#84c579586cee64236c19aa4c723a407b8a5a16d2"
     },
     "peerDependencies": {
         "typescript": "*"
@@ -26,8 +23,6 @@
     "scripts": {
         "build": "tsc",
         "prepublishOnly": "tsc",
-        "install": "tsc -p ./node_modules/tsst/",
-        "postinstall": "tsc -p ./node_modules/tsst/",
         "test": "echo \"Error: no test specified\" && exit 1"
     }
 }
