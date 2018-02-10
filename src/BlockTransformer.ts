@@ -73,24 +73,32 @@ export class BlockTransformer {
             return true;
         });
 
-        const returnStatement = ts.createReturn(
-            ts.createArrayLiteral(containedDiagnostics.map(diagnostic => {
-                const errorExpression = ts.createNew(
-                    ts.createIdentifier("Error"),
-                    [],
-                    [ts.createLiteral(typeof diagnostic.messageText === "string" ?
-                        diagnostic.messageText : diagnostic.messageText.messageText)]
-                );
-
-                ts.setSourceMapRange(errorExpression, {
-                    pos: diagnostic.start!,
-                    end: diagnostic.start! + diagnostic.length!
-                });
-
-                return errorExpression;
-            }), true)
+        // Error.stackTraceLimit = 0;
+        const traceStatement = ts.createAssignment(
+            ts.createPropertyAccess(ts.createIdentifier("Error"), "stackTraceLimit"),
+            ts.createLiteral(0)
         );
 
-        return ts.createBlock([returnStatement], true);
+        const returnStatement = ts.createThrow(
+            ts.createElementAccess(
+                ts.createArrayLiteral(containedDiagnostics.map(diagnostic => {
+                    const errorExpression = ts.createNew(
+                        ts.createIdentifier("Error"),
+                        [],
+                        [ts.createLiteral(typeof diagnostic.messageText === "string" ?
+                            diagnostic.messageText : diagnostic.messageText.messageText)]
+                    );
+
+                    ts.setSourceMapRange(errorExpression, {
+                        pos: diagnostic.start!,
+                        end: diagnostic.start! + diagnostic.length!
+                    });
+
+                    return errorExpression;
+                }), true)
+            , ts.createLiteral(0))
+        );
+
+        return ts.createBlock([traceStatement, returnStatement] as ts.Statement[], true);
     }
 }
