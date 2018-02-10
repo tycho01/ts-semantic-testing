@@ -10,7 +10,7 @@ import { Observable } from "rxjs";
 
 function build(glob: string, project?: string, useBlock?: boolean, outDir?: string) {
     const projectPath = project || "./";
-    const configPath = ts.findConfigFile(projectPath, ts.sys.fileExists);
+    const configPath = ts.findConfigFile(projectPath, ts.sys.fileExists) || `${projectPath}/tsconfig.json`;
     const basePath = path.resolve(path.dirname(configPath)); /*?*/
     const configReadResult = ts.readConfigFile(configPath, ts.sys.readFile);
 
