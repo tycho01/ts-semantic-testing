@@ -1,9 +1,9 @@
 {
-    "name": "tsst",
+    "name": "tsst-tycho",
     "description": "Helper utility for transforming typescript tests to allow testing for semantics rather than functionality.",
     "author": "Sam Pruden",
     "license": "ISC",
-    "version": "0.3.2",
+    "version": "0.3.3",
     "main": "./dist/index.js",
     "types": "./dist/index.d.ts",
     "dependencies": {
