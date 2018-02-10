@@ -73,14 +73,6 @@ export class BlockTransformer {
             return true;
         });
 
-        // Error.stackTraceLimit = 0;
-        const traceStatement = ts.createStatement(
-            ts.createAssignment(
-                ts.createPropertyAccess(ts.createIdentifier("Error"), "stackTraceLimit"),
-                ts.createLiteral(0)
-            )
-        );
-
         const errors = containedDiagnostics.map(diagnostic => {
             const errorExpression = ts.createNew(
                 ts.createIdentifier("Error"),
@@ -101,15 +93,6 @@ export class BlockTransformer {
             ts.createArrayLiteral([], true)
         );
 
-        const throwStatement = ts.createThrow(
-            ts.createElementAccess(
-                ts.createArrayLiteral(errors, true)
-            , ts.createLiteral(0))
-        );
-
-        return ts.createBlock(
-            (errors.length ? [traceStatement, throwStatement] : [returnStatement]) as ts.Statement[],
-            true
-        );
+        return ts.createBlock([returnStatement] as ts.Statement[], true);
     }
 }

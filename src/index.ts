@@ -36,18 +36,24 @@ export function tsst(scope: () => void | ReadonlyArray<Error>): TsstResult {
     return {
         errors: output || [],
         expectToCompile() {
-            if (this.errors.length) throw this.errors[0].message;
+            if (this.errors.length) {
+                Error.stackTraceLimit = 0;
+                throw this.errors[0];
+            }
         },
         expectToFail() {
             if (!this.errors.length) {
-                `No semantic failures`;
+                Error.stackTraceLimit = 0;
+                throw new Error(`No semantic failures`);
             }
         },
         expectToFailWith(msg: string | RegExp) {
             if (!this.errors.length) {
-                `No matching semantic failures, expected "${msg}"!`;
+                Error.stackTraceLimit = 0;
+                throw new Error(`No matching semantic failures, expected "${msg}"!`);
             } else if (this.errors.filter(e => RegExp(msg).test(e.message)).length === 0) {
-                `Expected failure "${msg}", got failure "${this.errors[0]}"!`;
+                Error.stackTraceLimit = 0;
+                throw new Error(`Expected failure "${msg}", got failure "${this.errors[0]}"!`);
             }
         }
     };
