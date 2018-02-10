@@ -29,7 +29,8 @@ export class TestTransformer {
                 ts.createNew(
                     ts.createIdentifier("Error"),
                     [],
-                    [ts.createLiteral(diagnostic.messageText.toString())]
+                    [ts.createLiteral(typeof diagnostic.messageText === "string" ?
+                        diagnostic.messageText : diagnostic.messageText.messageText)]
                 )
             );
 
