@@ -15,7 +15,7 @@
         "@types/minimatch": "^2.0.29",
         "@types/node": "^8.0.20",
         "tslint": "^5.6.0",
-        "typescript": "github:Microsoft/TypeScript#84c579586cee64236c19aa4c723a407b8a5a16d2"
+        "typescript": "^2.8.0-dev.20180210"
     },
     "peerDependencies": {
         "typescript": "*"
