@@ -5,6 +5,7 @@
         "strict": true,
         "module": "commonjs",
         "outDir": "dist",
+        "skipLibCheck": true,
         "declaration": true
     }
 }
