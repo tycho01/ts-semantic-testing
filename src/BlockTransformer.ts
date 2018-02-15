@@ -75,11 +75,23 @@ export class BlockTransformer {
 
         const returnStatement = ts.createReturn(
             ts.createArrayLiteral(containedDiagnostics.map(diagnostic => {
+                let txt = "";
+                const msg = diagnostic.messageText;
+                if (typeof msg === "string") {
+                    txt = msg;
+                } else {
+                    let chain = msg;
+                    const lines = [];
+                    while (chain.next) {
+                        lines.push(chain.messageText);
+                        chain = chain.next;
+                    }
+                    txt = lines.join("\n");
+                }
                 const errorExpression = ts.createNew(
                     ts.createIdentifier("Error"),
                     [],
-                    [ts.createLiteral(typeof diagnostic.messageText === "string" ?
-                        diagnostic.messageText : diagnostic.messageText.messageText)]
+                    [ts.createLiteral(txt)]
                 );
     
                 ts.setSourceMapRange(errorExpression, {
